@@ -1,7 +1,14 @@
 import { gql, graphql, testForApiError } from "../graphql.mjs";
 import { TembraApi, tembraBase } from "../types.mjs";
 const url = `${tembraBase}/public/graphql/space`;
+/**
+ * Tembra Space API
+ */
 export class SpaceApi extends TembraApi {
+    /**
+     * get information about Space
+     * @returns
+     */
     async get() {
         const result = await graphql(url, {
             query: gql `

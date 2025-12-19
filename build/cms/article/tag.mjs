@@ -6,6 +6,9 @@ import { articleApiUrl } from "./utils.mjs";
  */
 export class TagApi extends TembraApi {
     config;
+    /**
+     * @param config Tembra API configuration
+     */
     constructor(config) {
         super(config, articleApiUrl);
         this.config = config;

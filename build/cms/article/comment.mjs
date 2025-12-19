@@ -23,7 +23,7 @@ export class CommentApi extends TembraApi {
         const result = await graphql(this.apiUrl, {
             query: gql `
 				mutation createComment($data: CreateCommentInput!) {
-					createComment(data: $data)
+						createComment(data: $data)
 				}
 			`,
             variables: {

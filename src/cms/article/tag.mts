@@ -9,56 +9,70 @@ import { articleApiUrl } from "./utils.mjs";
 
 // language version of tag
 export interface TagContent {
-
-	// tag content language
+	/**
+	 * tag content language
+	 */
 	language: string;
 
-	// tag content (name)
+	/**
+	 * tag content (name)
+	 */
 	data: string;
-
 }
 
 // article tag
 export interface Tag {
-
-	// tag ID
+	/**
+	 * tag ID
+	 */
 	id: string;
 
-	// tag name
+	/**
+	 * tag name
+	 */
 	name: string;
 
-	// tag parent ID (either space article root or other tag)
+	/**
+	 * tag parent ID (either space article root or other tag)
+	 */
 	parentId: string;
 
-	// tag language versions
+	/**
+	 * tag language versions
+	 */
 	content: TagContent[];
-
 }
 
 // language version of tag to import
 export interface ImportTagContentInput {
-
-	// tag content language
+	/**
+	 * tag content language
+	 */
 	language: string;
 
-	// tag content (name)
+	/**
+	 * tag content (name)
+	 */
 	data: string;
-
 }
 
 // tag to import
 export interface ImportTagInput {
-
-	// tag name
+	/**
+	 * tag name
+	 */
 	name: string;
 
-	// tag parent ID (either null for root tag or other tag ID)
-	// there cannot be more than 2 levels of tag
+	/**
+	 * tag parent ID (either null for root tag or other tag ID)
+	 * there cannot be more than 2 levels of tag
+	 */
 	parentId: Nullable<string>;
 
-	// tag language versions
+	/**
+	 * tag language versions
+	 */
 	content: ImportTagContentInput[];
-
 }
 
 
@@ -67,7 +81,9 @@ export interface ImportTagInput {
  * Class providing CMS article tag functions
  */
 export class TagApi extends TembraApi {
-
+	/**
+	 * @param config Tembra API configuration
+	 */
 	constructor(protected override config: TembraApiConfig) {
 		super(config, articleApiUrl)
 	}

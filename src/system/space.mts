@@ -1,39 +1,65 @@
 import { gql, graphql, testForApiError } from "../graphql.mjs";
 import { TembraApi, tembraBase } from "../types.mjs";
 
-// SPACE
+/**
+ * SPACE
+ */
 export interface Space {
 
-	// space ID
-	id: string;
+  /**
+   * space ID
+   */
+  id: string;
 
-	// space name
-	name: string;
+  /**
+   * space name
+   */
+  name: string;
 
-	// root for article related content
-	articleParentId: string;
+  /**
+   * root for article related content
+   */
+  articleParentId: string;
 
-	// root for file module
-	fileParentId: string;
+  /**
+   * root for file module
+   */
+  fileParentId: string;
 
-	// root for page related content
-	pageParentId: string;
+  /**
+   * root for page related content
+   */
+  pageParentId: string;
 
-	// root for text related content
-	textParentId: string;
+  /**
+   * root for text related content
+   */
+  textParentId: string;
 
-	// root for key-value related content
-	keyValueParentId: string;
+  /**
+   * root for key-value related content
+   */
+  keyValueParentId: string;
 
-	// root for CMS related content (all files)
-	cmsParentId: string;
-
+  /**
+   * root for CMS related content (all files)
+   */
+  cmsParentId: string;
 }
+
 
 const url = `${tembraBase}/public/graphql/space`;
 
 
+/**
+ * Tembra Space API
+ */
 export class SpaceApi extends TembraApi {
+
+	/**
+	 * get information about Space
+	 * @returns
+	 */
 	async get(): Promise<Space | null> {
 		const result = await graphql<{ get: Space | null }>(url, {
 			query: gql`

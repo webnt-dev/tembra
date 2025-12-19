@@ -2,260 +2,423 @@ import { gql, graphql, GraphQLCallback, testForApiError } from "../../graphql.mj
 import { LanguageCountry, Maybe, Nullable, Optional, TembraApi, TembraApiConfig } from "../../types.mjs";
 import { pageApiUrl } from "./utils.mjs";
 
-// import/create page data
+/**
+ * import/create page data
+ */
 export interface ImportPageInput {
-	// page name
+	/**
+	 * page name
+	 */
 	name: string;
 
-	// list of File.id
+	/**
+	 * list of File.id
+	 */
 	files: string[];
 
-	// whether page is published
+	/**
+	 * whether page is published
+	 */
 	published: boolean;
 
-	// date and time since the page is published
+	/**
+	 * date and time since the page is published
+	 */
 	publishedFrom: Date;
 
-	// date and time until the page is published
+	/**
+	 * date and time until the page is published
+	 */
 	publishedTo?: Maybe<Date>;
 
 }
 
-// import/create page version data
+/**
+ * import/create page version data
+ */
 export interface ImportPageVersionInput {
 
-	// language code
+	/**
+	 * language code
+	 */
 	language: string;
 
-	// country code
+	/**
+	 * country code
+	 */
 	country: string[];
 
-	// whether page version published parameters
-	// are copied from parent page
+	/**
+	 * whether page version published parameters
+	 * are copied from parent page
+	 */
 	publishedAsParent: boolean;
 
-	// whether page version is published
+	/**
+	 * whether page version is published
+	 */
 	published: boolean;
 
-	// date and time since the page version is published
+	/**
+	 * date and time since the page version is published
+	 */
 	publishedFrom: Date;
 
-	// date and time until the page version is published
+	/**
+	 * date and time until the page version is published
+	 */
 	publishedTo?: Maybe<Date>;
 
-	// Page.id
+	/**
+	 * Page.id
+	 */
 	parentId: string;
 
-	// page version title
+	/**
+	 * page version title
+	 */
 	title: string;
 
-	// page version URL
+	/**
+	 * page version URL
+	 */
 	url: string;
 
-	// page version text
+	/**
+	 * page version text
+	 */
 	text: string;
 
-	// page version description
+	/**
+	 * page version description
+	 */
 	description: string;
 
-	// page version keywords
+	/**
+	 * page version keywords
+	 */
 	keywords: string;
 
-	// og:description tag
+	/**
+	 * og:description tag
+	 */
 	ogDescription: string;
 
-	// og:title tag
+	/**
+	 * og:title tag
+	 */
 	ogTitle: string;
 
-	// og:image tag
+	/**
+	 * og:image tag
+	 */
 	ogImage: string;
 }
 
 
-// input for page versions listing
+/**
+ * input for page versions listing
+ */
 export interface PageVersionListInput {
-	// language / country filters for listing
+	/**
+	 * language / country filters for listing
+	 */
 	languageCountry?: Maybe<LanguageCountry[]>;
 
-	// if true, listing will return all versions in languageCountry parameter
-	// if false, listing will return only first found version for languageCountry parameter
+	/**
+	 * if true, listing will return all versions in languageCountry parameter
+	 * if false, listing will return only first found version for languageCountry parameter
+	 */
 	languageCountryAll?: Maybe<Boolean>;
 
-	// if true, listing will return only published versions
-	// if false, listing will return only unpublished versions
+	/**
+	 * if true, listing will return only published versions
+	 * if false, listing will return only unpublished versions
+	 */
 	published?: Maybe<boolean>;
 }
 
-// page representation
+/**
+ * page representation
+ */
 export interface Page {
 
-	// Page.id
+	/**
+	 * Page.id
+	 */
 	id: string;
 
-	// page name
+	/**
+	 * page name
+	 */
 	name: string;
 
-	// Space.pageParentId
+	/**
+	 * Space.pageParentId
+	 */
 	parentId: string;
 
-	// date and time when page was created
+	/**
+	 * date and time when page was created
+	 */
 	createdAt: Date;
 
-	// date and time when page last updated
+	/**
+	 * date and time when page last updated
+	 */
 	updatedAt: Date;
 
-	// list of File.id
+	/**
+	 * list of File.id
+	 */
 	files: string[];
 
-	// whether page is published
+	/**
+	 * whether page is published
+	 */
 	published: boolean;
 
-	// date and time since the page is published
+	/**
+	 * date and time since the page is published
+	 */
 	publishedFrom: string;
 
-	// date and time until the page is published
+	/**
+	 * date and time until the page is published
+	 */
 	publishedTo: Nullable<string>;
 
-	// listing function for full page versions
+	/**
+	 * listing function for full page versions
+	 */
 	fullVersions: Optional<PageVersion[]>;
 
-	// listing function for versions information list
+	/**
+	 * listing function for versions information list
+	 */
 	versions: PageVersionBase[];
 }
 
-type DateProps = "createdAt" | "updatedAt" | "publishedFrom" | "publishedTo";
-interface DateFields {
+/**
+ * type representing date and time properties in GraphQL format
+ */
+export type DateProps = "createdAt" | "updatedAt" | "publishedFrom" | "publishedTo";
+
+/**
+ * type representing date and time properties in JS format
+ */
+export interface DateFields {
 	createdAt: string;
 	updatedAt: string;
 	publishedFrom: string;
 	publishedTo: Nullable<string>;
 }
 
-type GPage = Omit<Page, "fullVersions" | "versions" | DateProps> & DateFields & {
+/**
+ * type representing Page in GraphQL format
+ */
+export type GPage = Omit<Page, "fullVersions" | "versions" | DateProps> & DateFields & {
 	fullVersions: Optional<GPageVersion[]>,
 	versions: GPageVersionBase[],
 }
 
-// input for page listing
+/**
+ * input for page listing
+ */
 export interface ListPagesInput {
 
-	// pages names
+	/**
+	 * pages names
+	 */
 	name?: Maybe<string[]>;
 
-	// listing offset
+	/**
+	 * listing offset
+	 */
 	start?: Maybe<number>;
 
-	// listing count, defaults to 100
+	/**
+	 * listing count, defaults to 100
+	 */
 	count?: Maybe<number>;
 
 }
 
-// basic information about page version
+/**
+ * basic information about page version
+ */
 export interface PageVersionBase {
 
-	// version id
+	/**
+	 * version id
+	 */
 	id: string;
 
-	// language code
+	/**
+	 * language code
+	 */
 	language: string;
 
-	// country code
+	/**
+	 * country code
+	 */
 	country: string[];
 
-	// date and time when record was created
+	/**
+	 * date and time when record was created
+	 */
 	createdAt: Date;
 
-	// date and time when record last updated
+	/**
+	 * date and time when record last updated
+	 */
 	updatedAt: Date;
 
-	// whether page version published parameters
-	// are copied from parent page
+	/**
+	 * whether page version published parameters
+	 * are copied from parent page
+	 */
 	publishedAsParent: boolean;
 
-	// whether page version is published
+	/**
+	 * whether page version is published
+	 */
 	published: boolean;
 
-	// date and time since the page version is published
+	/**
+	 * date and time since the page version is published
+	 */
 	publishedFrom: Date;
 
-	// date and time until the page version is published
+	/**
+	 * date and time until the page version is published
+	 */
 	publishedTo: Nullable<Date>;
 
 }
 
-type GPageVersionBase = Omit<PageVersionBase, DateProps> & DateFields;
+/**
+ * type representing PageVersionBase in GraphQL format
+ */
+export type GPageVersionBase = Omit<PageVersionBase, DateProps> & DateFields;
 
+/**
+ * Page version representation
+ */
 export interface PageVersion extends PageVersionBase {
 
-	// Page.id
+	/**
+	 * Page.id
+	 */
 	parentId: string;
 
-	// page version title
+	/**
+	 * page version title
+	 */
 	title: string;
 
-	// page version URL
+	/**
+	 * page version URL
+	 */
 	url: string;
 
-	// page version text
+	/**
+	 * page version text
+	 */
 	text: string;
 
-	// page version description
+	/**
+	 * page version description
+	 */
 	description: string;
 
-	// page version keywords
+	/**
+	 * page version keywords
+	 */
 	keywords: string;
 
-	// og:description tag
+	/**
+	 * og:description tag
+	 */
 	ogDescription: string;
 
-	// og:title tag
+	/**
+	 * og:title tag
+	 */
 	ogTitle: string;
 
-	// og:image tag
+	/**
+	 * og:image tag
+	 */
 	ogImage: string;
 
 }
 
-type GPageVersion = Omit<PageVersion, "createdAt" | "updatedAt" | "publishedFrom" | "publishedTo"> & {
+/**
+ * type representing PageVersion in GraphQL format
+ */
+export type GPageVersion = Omit<PageVersion, "createdAt" | "updatedAt" | "publishedFrom" | "publishedTo"> & {
 	createdAt: string;
 	updatedAt: string;
 	publishedFrom: string;
 	publishedTo: Nullable<string>;
 }
 
-// input for versions listing
+/**
+ * input for versions listing
+ */
 export interface ListPageVersionsInput {
 
-	// language / country filters for listing
+	/**
+	 * language / country filters for listing
+	 */
 	languageCountry?: Maybe<LanguageCountry[]>;
 
-	// if true, listing will return all versions in languageCountry parameter
-	// if false, listing will return only first found version for languageCountry parameter
+	/**
+	 * if true, listing will return all versions in languageCountry parameter
+	 * if false, listing will return only first found version for languageCountry parameter
+	 */
 	languageCountryAll?: Maybe<boolean>;
 
-	// if true, listing will return only published versions
-	// if false, listing will return only unpublished versions
+	/**
+	 * if true, listing will return only published versions
+	 * if false, listing will return only unpublished versions
+	 */
 	published?: Maybe<boolean>;
 
-	// page ID
+	/**
+	 * page ID
+	 */
 	parentId?: Maybe<string>;
 
-	// page version title
+	/**
+	 * page version title
+	 */
 	title?: Maybe<string>;
 
-	// page version URL
+	/**
+	 * page version URL
+	 */
 	url?: Maybe<string>;
 
-	// sort by
+	/**
+	 * sort by
+	 */
 	sort?: Maybe<"title" | "published">
 
-	// sort direction
+	/**
+	 * sort direction
+	 */
 	sortDirection?: Maybe<number>;
 
-	// listing start
+	/**
+	 * listing start
+	 */
 	start?: Maybe<number>;
 
-	// listing count
+	/**
+	 * listing count
+	 */
 	count?: Maybe<number>;
 }
 
@@ -274,6 +437,9 @@ function fixPublishedAndCreated<T>(p: DateFields): T {
  * Class providing CMS page functions
  */
 export class PageApi extends TembraApi {
+	/**
+	 * @param config Tembra API configuration
+	 */
 	constructor(protected override config: TembraApiConfig) {
 		super(config, pageApiUrl)
 	}

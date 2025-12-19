@@ -1,4 +1,3 @@
-
 /**********************************************
  * Comment
  *********************************************/
@@ -7,133 +6,218 @@ import { gql, graphql, GraphQLCallback, testForApiError } from "../../graphql.mj
 import { Maybe, Nullable, TembraApi, TembraApiConfig } from "../../types.mjs";
 import { articleApiUrl } from "./utils.mjs";
 
-// custom comment field (e.g. email, www pages)
+/**
+ * custom comment field (e.g. email, www pages)
+ */
 export interface CommentField {
-	// field name
+	/**
+	 * field name
+	 */
 	name: string;
 
-	// field value
+	/**
+	 * field value
+	 */
 	value: string;
 }
 
 
-// comment
+/**
+ * comment
+ */
 export interface Comment {
-	// comment id
+	/**
+	 * comment id
+	 */
 	id: string;
 
-	// comment parent (article) id
+	/**
+	 * comment parent (article) id
+	 */
 	articleId: string;
 
-	// comment parent (article version) id
+	/**
+	 * comment parent (article version) id
+	 */
 	versionId: string;
 
-	// comment parent (parent comment) id
+	/**
+	 * comment parent (parent comment) id
+	 */
 	parentId: Nullable<string>;
 
-	// ID of user of Tembra (to identify your users responses)
+	/**
+	 * ID of user of Tembra (to identify your users responses)
+	 */
 	userId: Nullable<string>;
 
-	// numeric representation of comemnts tree structure
-	// 00000008.00000015.00000002 would represent second answer to 15th answer to 8th comment
-	// if comment is deleted, levelIdent does not update, but order is of course preserved
-	// usefull for sorting, can be referenced as id (since it does not change and is unique)
+	/**
+	 * numeric representation of comemnts tree structure
+	 * 00000008.00000015.00000002 would represent second answer to 15th answer to 8th comment
+	 * if comment is deleted, levelIdent does not update, but order is of course preserved
+	 * usefull for sorting, can be referenced as id (since it does not change and is unique)
+	 */
 	levelIdent: string;
 
-	// version language
+	/**
+	 * version language
+	 */
 	language: string;
 
-	// date and time when comment version was created
+	/**
+	 * date and time when comment version was created
+	 */
 	createdAt: string;
 
-	// date and time when comment version was last updated
+	/**
+	 * date and time when comment version was last updated
+	 */
 	updatedAt: string;
 
-	// comment state
+	/**
+	 * comment state
+	 */
 	state: CommentState;
 
-	// comment subject
+	/**
+	 * comment subject
+	 */
 	subject: string;
 
-	// comment text
+	/**
+	 * comment text
+	 */
 	text: string;
 
-	// comment custom fields
+	/**
+	 * comment custom fields
+	 */
 	fields: CommentField[];
 }
 
-// comment state (new comment, comment marked as valid, comment marked as junk)
+/**
+ * comment state (new comment, comment marked as valid, comment marked as junk)
+ */
 export type CommentState = "new" | "valid" | "junk";
 
-// custom comment field (e.g. email, www pages)
+/**
+ * custom comment field (e.g. email, www pages)
+ */
 export interface CommentFieldInput {
-	// field name
+	/**
+	 * field name
+	 */
 	name: string;
 
-	// field value
+	/**
+	 * field value
+	 */
 	value: string;
 }
 
-// create comment data (submit comment)
+/**
+ * create comment data (submit comment)
+ */
 export interface CreateCommentInput {
-	// article version ID
+	/**
+	 * article version ID
+	 */
 	versionId: string;
 
-	// comment parent (comment id), null if root comment
+	/**
+	 * comment parent (comment id), null if root comment
+	 */
 	parentId: Nullable<string>;
 
-	// comment subject
+	/**
+	 * comment subject
+	 */
 	subject: string;
 
-	// comment text
+	/**
+	 * comment text
+	 */
 	text: string;
 
-	// comment custom fields
+	/**
+	 * comment custom fields
+	 */
 	fields: CommentFieldInput[];
 }
 
-// comment listing/filtering data, Maybe fields are ignored if null | undefined
+/**
+ * comment listing/filtering data, Maybe fields are ignored if null | undefined
+ */
 export interface ListCommentsInput {
 
-	// article ID
+	/**
+	 * article ID
+	 */
 	articleId: string;
 
-	// parent comment id (or null to start from root)
+	/**
+	 * parent comment id (or null to start from root)
+	 */
 	parentId: Nullable<string>;
 
-	// article version id
+	/**
+	 * article version id
+	 */
 	versionId: Nullable<string>;
 
-	// comment version language
+	/**
+	 * comment version language
+	 */
 	language?: Maybe<string>;
 
-	// whether to incclude all coments children
+	/**
+	 * whether to incclude all coments children
+	 */
 	includeChildren?: Maybe<boolean>;
 
-	// which states are you interested
-	// if parent does not mathc the state, no child is returned
+	/**
+	 * which states are you interested
+	 * if parent does not mathc the state, no child is returned
+	 */
 	state?: Maybe<CommentState[]>;
 
-	// listing offset start
+	/**
+	 * listing offset start
+	 */
 	start?: Maybe<number>;
 
-	// number of items to return (defaults to 100)
+	/**
+	 * number of items to return (defaults to 100)
+	 */
 	count?: Maybe<number>;
 }
 
-// listing result
+/**
+ * listing result
+ */
 export interface ListCommentsResult {
 
-	// list of comments
+	/**
+	 * list of comments
+	 */
 	items: Comment[];
+	/**
+	 * listing information
+	 */
 	listing: {
-		// number of all items based on parameters
+		/**
+		 * number of all items based on parameters
+		 */
 		itemsCount: number;
 
-		// listing offset start (from request)
+		/**
+		 * listing offset start (from request)
+		 */
 		start: number;
 
-		// listing count (from request)
+		/**
+		 * listing count (from request)
+		 */
 		count: number;
 	};
 }
@@ -158,7 +242,7 @@ export class CommentApi extends TembraApi {
 		const result = await graphql<{ createComment: string }>(this.apiUrl, {
 			query: gql`
 				mutation createComment($data: CreateCommentInput!) {
-					createComment(data: $data)
+						createComment(data: $data)
 				}
 			`,
 			variables: {
@@ -213,10 +297,10 @@ export class CommentApi extends TembraApi {
 				}
 			`,
 			variables: {
-				data
+					data
 			}
 		}, {
-			'x-wnt-space-id': this.config.spaceId,
+				'x-wnt-space-id': this.config.spaceId,
 		}, callback);
 
 		testForApiError(result);

@@ -2,147 +2,230 @@ import { gql, graphql, GraphQLCallback, testForApiError } from "../../graphql.mj
 import { LanguageCountry, Maybe, Nullable, Optional, TembraApi, TembraApiConfig } from "../../types.mjs";
 import { keyValueApiUrl } from "./utils.mjs";
 
-// key-value data
+/**
+ * key-value data
+ */
 export interface ImportKeyValueInput {
-	// name
+	/**
+	 * name
+	 */
 	name: string;
 }
 
-// key-value pair data
+/**
+ * key-value pair data
+ */
 export interface KeyValuePairInput {
 
-	// key
+	/**
+	 * key
+	 */
 	name: string;
 
-	// value
+	/**
+	 * value
+	 */
 	value: string;
 }
 
-// key-value version data
+/**
+ * key-value version data
+ */
 export interface ImportKeyValueVersionInput {
-	// KeyValue.id
+	/**
+	 * KeyValue.id
+	 */
 	parentId: string;
 
-	// language code
+	/**
+	 * language code
+	 */
 	language: string;
 
-	// country code
+	/**
+	 * country code
+	 */
 	country: string[];
 
-	// list of key-value pairs
+	/**
+	 * list of key-value pairs
+	 */
 	pairs: KeyValuePairInput[];
 }
 
 
-// key-value pairs listing input data
+/**
+ * key-value pairs listing input data
+ */
 export interface KeyValueVersionListInput {
 
-	// language / country filters for listing
+	/**
+	 * language / country filters for listing
+	 */
 	languageCountry?: Maybe<LanguageCountry[]>;
 
-	// if true, listing will return all versions in languageCountry parameter
-	// if false, listing will return only first found version for languageCountry parameter
+	/**
+	 * if true, listing will return all versions in languageCountry parameter
+	 * if false, listing will return only first found version for languageCountry parameter
+	 */
 	languageCountryAll?: Maybe<boolean>;
 
 }
 
-// key-value pair representation
+/**
+ * key-value pair representation
+ */
 export interface KeyValue {
 
-	// ID
+	/**
+	 * ID
+	 */
 	id: string;
 
-	// name
+	/**
+	 * name
+	 */
 	name: string;
 
-	// date and time when record was created
+	/**
+	 * date and time when record was created
+	 */
 	createdAt: string;
 
-	// date and time when record last updated
+	/**
+	 * date and time when record last updated
+	 */
 	updatedAt: string;
 
-	// listing function for full key-value versions
+	/**
+	 * listing function for full key-value versions
+	 */
 	fullVersions: Optional<KeyValueVersion[]>;
 
-	// listing function for versions information list
+	/**
+	 * listing function for versions information list
+	 */
 	versions: KeyValueVersionBase[];
 }
 
-type GKeyValue = Omit<KeyValue, "createdAt" | "updatedAt" | "fullVersions" | "versions"> & {
+/**
+ * type representing KeyValue in GraphQL format
+ */
+export type GKeyValue = Omit<KeyValue, "createdAt" | "updatedAt" | "fullVersions" | "versions"> & {
 	createdAt: string;
 	updatedAt: string;
 	fullVersions: Optional<GKeyValueVersion[]>;
 	versions: GKeyValueVersionBase[];
 }
 
-// input for key-value listing
+/**
+ * input for key-value listing
+ */
 export interface ListKeyValuesInput {
 
-	// list of names to list
+	/**
+	 * list of names to list
+	 */
 	name?: Maybe<string[]>;
 
-	// listing offset
+	/**
+	 * listing offset
+	 */
 	start?: Maybe<number>;
 
-	// listing count
+	/**
+	 * listing count
+	 */
 	count?: Maybe<number>;
 
-	// sort field (name)
+	/**
+	 * sort field (name)
+	 */
 	sort?: Maybe<"name">;
 
-	// sort direction (1 = ascending, -1 = descending)
+	/**
+	 * sort direction (1 = ascending, -1 = descending)
+	 */
 	sortDirection?: Maybe<number>;
 }
 
-// key-value pair data
+/**
+ * key-value pair data
+ */
 export interface KeyValuePair {
 
-	// key
+	/**
+	 * key
+	 */
 	name: string;
 
-	// value
+	/**
+	 * value
+	 */
 	value: string;
 
 }
 
 
-// basic information of version
+/**
+ * basic information of version
+ */
 export interface KeyValueVersionBase {
 
-	// version id
+	/**
+	 * version id
+	 */
 	id: string;
 
-	// language code
+	/**
+	 * language code
+	 */
 	language: string;
 
-	// country code
+	/**
+	 * country code
+	 */
 	country: string[];
 
-	// date and time when record was created
+	/**
+	 * date and time when record was created
+	 */
 	createdAt: Date;
 
-	// date and time when record last updated
+	/**
+	 * date and time when record last updated
+	 */
 	updatedAt: Date;
 
 }
-
-type GKeyValueVersionBase = Omit<KeyValueVersionBase, "createdAt" | "updatedAt"> & {
+/**
+ * type representing KeyValueVersionBase in GraphQL format
+ */
+export type GKeyValueVersionBase = Omit<KeyValueVersionBase, "createdAt" | "updatedAt"> & {
 	createdAt: string;
 	updatedAt: string;
 }
 
-// key-value version information
+/**
+ * key-value version information
+ */
 export interface KeyValueVersion {
 
-	// KeyValue.id
+	/**
+	 * KeyValue.id
+	 */
 	parentId: string;
 
-	// list of key-value pairs
+	/**
+	 * list of key-value pairs
+	 */
 	pairs: KeyValuePair[];
 
 }
-
-type GKeyValueVersion = Omit<KeyValueVersion, "createdAt" | "updatedAt"> & {
+/**
+ * type representing KeyValueVersion in GraphQL format
+ */
+export type GKeyValueVersion = Omit<KeyValueVersion, "createdAt" | "updatedAt"> & {
 	createdAt: string;
 	updatedAt: string;
 }

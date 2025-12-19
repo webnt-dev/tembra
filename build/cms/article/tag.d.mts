@@ -4,22 +4,56 @@ import { Nullable, TembraApi, TembraApiConfig } from "../../types.mjs";
  * TAG
  *********************************************/
 export interface TagContent {
+    /**
+     * tag content language
+     */
     language: string;
+    /**
+     * tag content (name)
+     */
     data: string;
 }
 export interface Tag {
+    /**
+     * tag ID
+     */
     id: string;
+    /**
+     * tag name
+     */
     name: string;
+    /**
+     * tag parent ID (either space article root or other tag)
+     */
     parentId: string;
+    /**
+     * tag language versions
+     */
     content: TagContent[];
 }
 export interface ImportTagContentInput {
+    /**
+     * tag content language
+     */
     language: string;
+    /**
+     * tag content (name)
+     */
     data: string;
 }
 export interface ImportTagInput {
+    /**
+     * tag name
+     */
     name: string;
+    /**
+     * tag parent ID (either null for root tag or other tag ID)
+     * there cannot be more than 2 levels of tag
+     */
     parentId: Nullable<string>;
+    /**
+     * tag language versions
+     */
     content: ImportTagContentInput[];
 }
 /**
@@ -27,6 +61,9 @@ export interface ImportTagInput {
  */
 export declare class TagApi extends TembraApi {
     protected config: TembraApiConfig;
+    /**
+     * @param config Tembra API configuration
+     */
     constructor(config: TembraApiConfig);
     /**
      * list all tags

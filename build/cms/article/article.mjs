@@ -1,3 +1,6 @@
+/**
+ * API and interfaces for accessing Tembra CMS Article module
+ */
 import { gql, graphql, testForApiError } from "../../graphql.mjs";
 import { TembraApi } from "../../types.mjs";
 import { articleApiUrl } from "./utils.mjs";

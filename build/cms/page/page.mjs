@@ -15,6 +15,9 @@ function fixPublishedAndCreated(p) {
  */
 export class PageApi extends TembraApi {
     config;
+    /**
+     * @param config Tembra API configuration
+     */
     constructor(config) {
         super(config, pageApiUrl);
         this.config = config;

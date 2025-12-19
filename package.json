@@ -1,0 +1,64 @@
+{
+  "name": "@webnt-dev/tembra",
+  "version": "1.0.0",
+  "description": "Package for public API for Tembra project (https://www.tembra.app)",
+  "main": "build/index.mjs",
+  "types": "build/index.d.mts",
+  "files": [
+    "src",
+    "build"
+  ],
+  "type": "module",
+  "scripts": {
+    "build": "tsc --project ./tsconfig.json",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/webnt-dev/tembra.git"
+  },
+  "keywords": [],
+  "author": {
+    "name": "Bronislav Klučka",
+    "email": "Bronislav.Klucka@webnt.dev"
+  },
+  "license": "BSD-3-Clause",
+  "bugs": {
+    "url": "https://github.com/webnt-dev/tembra/issues"
+  },
+  "homepage": "https://github.com/webnt-dev/tembra#readme",
+  "devDependencies": {
+    "@types/node": "^25.0.3",
+    "typescript": "^5.9.3"
+  },
+  "exports": {
+    ".": {
+      "types": "./build/index.d.mts",
+      "import": "./build/index.mjs"
+    },
+    "./cms": {
+      "types": "./build/cms/index.d.mts",
+      "import": "./build/cms/index.mjs"
+    },
+    "./cms/article": {
+      "types": "./build/cms/article/index.d.mts",
+      "import": "./build/cms/article/index.mjs"
+    },
+    "./cms/text": {
+      "types": "./build/cms/text/index.d.mts",
+      "import": "./build/cms/text/index.mjs"
+    },
+    "./cms/page": {
+      "types": "./build/cms/page/index.d.mts",
+      "import": "./build/cms/page/index.mjs"
+    },
+    "./cms/keyvalue": {
+      "types": "./build/cms/keyvalue/index.d.mts",
+      "import": "./build/cms/keyvalue/index.mjs"
+    },
+    "./system": {
+      "types": "./build/system/index.d.mts",
+      "import": "./build/system/index.mjs"
+    }
+  }
+}

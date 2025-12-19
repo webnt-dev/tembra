@@ -58,7 +58,7 @@ export class SpaceApi extends TembraApi {
 
 	/**
 	 * get information about Space
-	 * @returns
+	 * @returns Space or null if not found
 	 */
 	async get(): Promise<Space | null> {
 		const result = await graphql<{ get: Space | null }>(url, {

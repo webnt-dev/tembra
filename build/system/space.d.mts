@@ -42,7 +42,7 @@ export interface Space {
 export declare class SpaceApi extends TembraApi {
     /**
      * get information about Space
-     * @returns
+     * @returns Space or null if not found
      */
     get(): Promise<Space | null>;
 }

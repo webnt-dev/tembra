@@ -7,7 +7,7 @@ const url = `${tembraBase}/public/graphql/space`;
 export class SpaceApi extends TembraApi {
     /**
      * get information about Space
-     * @returns
+     * @returns Space or null if not found
      */
     async get() {
         const result = await graphql(url, {

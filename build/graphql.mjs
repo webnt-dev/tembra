@@ -1,3 +1,7 @@
+/**
+ * function provides syntax highlighting of GraphQL queries in editors that support it.
+ * use GraphQL: Syntax Highlighting extension in VSCode
+ */
 export function gql(chunks, ...variables) {
     return chunks.reduce((accumulator, chunk, index) => `${accumulator}${chunk}${index in variables ? variables[index] : ''}`, '');
 }
@@ -17,6 +21,14 @@ function httpError(statusText, status) {
         }
     };
 }
+/**
+ * function to perform GraphQL queries
+ * @param url url to GraphQL endpoint
+ * @param data Query data
+ * @param headers request headers
+ * @param callback callback function called on request completion
+ * @returns promise with GraphQL result
+ */
 export async function graphql(url, data, headers = {}, callback) {
     try {
         const f = await fetch(url, {
@@ -56,6 +68,9 @@ export async function graphql(url, data, headers = {}, callback) {
         return r;
     }
 }
+/**
+ * GraphQL Error class
+ */
 export class GraphQLError extends Error {
     data;
     constructor(error) {
@@ -64,6 +79,10 @@ export class GraphQLError extends Error {
         this.name = 'GraphQLError';
     }
 }
+/**
+ * function tests GraphQL result for errors and throws GraphQLError if any found
+ * @param graphQLResult GraphQL result to test
+ */
 export function testForApiError(graphQLResult) {
     if (graphQLResult.errors?.length) {
         throw new GraphQLError(graphQLResult.errors[0]);

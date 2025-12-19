@@ -11,6 +11,8 @@
   "type": "module",
   "scripts": {
     "build": "tsc --project ./tsconfig.json",
+		"rollup": "rollup -c",
+		"build-all": "npm run build && npm run rollup",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -28,7 +30,12 @@
   },
   "homepage": "https://github.com/webnt-dev/tembra#readme",
   "devDependencies": {
+    "@rollup/plugin-commonjs": "^29.0.0",
+    "@rollup/plugin-node-resolve": "^16.0.3",
+    "@rollup/plugin-terser": "^0.4.4",
     "@types/node": "^25.0.3",
+    "rollup": "^4.53.5",
+    "rollup-plugin-summary": "^3.0.1",
     "typescript": "^5.9.3"
   },
   "exports": {

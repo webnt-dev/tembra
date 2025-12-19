@@ -1,0 +1,1 @@
+{"version":3,"file":"utils.mjs","sourceRoot":"","sources":["../../../src/cms/keyvalue/utils.mts"],"names":[],"mappings":"AAAA,OAAO,EAAE,UAAU,EAAE,MAAM,iBAAiB,CAAC;AAE7C,MAAM,CAAC,MAAM,cAAc,GAAG,GAAG,UAAU,8BAA8B,CAAC","sourcesContent":["import { tembraBase } from \"../../types.mjs\";\n\nexport const keyValueApiUrl = `${tembraBase}/public/cms/graphql/keyValue`;\n"]}

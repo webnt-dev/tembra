@@ -1,0 +1,1 @@
+{"version":3,"file":"utils.mjs","sourceRoot":"","sources":["../../../src/cms/article/utils.mts"],"names":[],"mappings":"AAAA,OAAO,EAAE,UAAU,EAAE,MAAM,iBAAiB,CAAC;AAE7C,MAAM,CAAC,MAAM,aAAa,GAAG,GAAG,UAAU,6BAA6B,CAAC","sourcesContent":["import { tembraBase } from \"../../types.mjs\";\n\nexport const articleApiUrl = `${tembraBase}/public/cms/graphql/article`;\n"]}

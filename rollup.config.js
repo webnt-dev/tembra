@@ -3,8 +3,21 @@ import resolve from '@rollup/plugin-node-resolve';
 import terser from '@rollup/plugin-terser';
 import summary from 'rollup-plugin-summary';
 import commonjs from '@rollup/plugin-commonjs';
-
+import fs from 'fs';
 import pkg from './package.json' with { type: 'json' };
+
+
+function copyAfterBuild(src, dest) {
+  return {
+    name: 'copy-after-build',
+    async writeBundle() {
+      await fs.promises.mkdir('public', { recursive: true });
+      await fs.promises.copyFile(`public/tembra-api.${pkg.version}.mjs`, `public/tembra-api.latest.mjs`);
+			await fs.promises.copyFile(`public/tembra-api.${pkg.version}.mjs.map`, `public/tembra-api.latest.mjs.map`);
+      console.log(`JS bundle copied`);
+    }
+  };
+}
 
 
 
@@ -32,6 +45,7 @@ export default {
     summary({
 			showMinifiedSize: true,
 		}),
+		copyAfterBuild(),
   ],
 
 	input: {

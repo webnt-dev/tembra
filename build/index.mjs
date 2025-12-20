@@ -1,3 +1,4 @@
 export * from './system/index.mjs';
 export * from './cms/index.mjs';
+export { apiConfig } from './types.mjs';
 //# sourceMappingURL=index.mjs.map

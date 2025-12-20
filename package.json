@@ -1,6 +1,6 @@
 {
   "name": "@webnt-dev/tembra",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Package for public API for Tembra project (https://www.tembra.app)",
   "main": "build/index.mjs",
   "types": "build/index.d.mts",

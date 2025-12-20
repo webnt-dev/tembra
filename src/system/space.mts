@@ -1,5 +1,5 @@
 import { gql, graphql, testForApiError } from "../graphql.mjs";
-import { TembraApi, tembraBase } from "../types.mjs";
+import { TembraApi, apiConfig } from "../types.mjs";
 
 /**
  * SPACE
@@ -48,7 +48,7 @@ export interface Space {
 }
 
 
-const url = `${tembraBase}/public/graphql/space`;
+const url = `${apiConfig.tembraBase}/public/graphql/space`;
 
 
 /**

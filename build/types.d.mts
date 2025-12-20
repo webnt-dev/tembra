@@ -13,7 +13,12 @@ export interface LanguageCountry {
 /**
  * Tembra API base URL endpoint
  */
-export declare const tembraBase = "http://localhost:8083";
+export declare const apiConfig: {
+    tembraBase: string;
+};
+/**
+ * Tembra API base URL endpoint
+ */
 /**
  * Tembra API configuration
  */

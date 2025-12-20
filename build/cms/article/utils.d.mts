@@ -1,2 +1,2 @@
-export declare const articleApiUrl = "http://localhost:8083/public/cms/graphql/article";
+export declare const articleApiUrl: string;
 //# sourceMappingURL=utils.d.mts.map

@@ -1,6 +1,6 @@
 import { gql, graphql, testForApiError } from "../graphql.mjs";
-import { TembraApi, tembraBase } from "../types.mjs";
-const url = `${tembraBase}/public/graphql/space`;
+import { TembraApi, apiConfig } from "../types.mjs";
+const url = `${apiConfig.tembraBase}/public/graphql/space`;
 /**
  * Tembra Space API
  */

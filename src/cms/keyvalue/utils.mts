@@ -1,3 +1,3 @@
-import { tembraBase } from "../../types.mjs";
+import { apiConfig } from "../../types.mjs";
 
-export const keyValueApiUrl = `${tembraBase}/public/cms/graphql/keyValue`;
+export const keyValueApiUrl = `${apiConfig.tembraBase}/public/cms/graphql/keyValue`;

@@ -13,12 +13,17 @@ export interface LanguageCountry {
 	country?: Maybe<string>;
 }
 
-//export const tembraBase = 'https://api.tembra.app';
+/**
+ * Tembra API base URL endpoint
+ */
+export const apiConfig = {
+	tembraBase: 'https://api.tembra.app',
+}
 
 /**
  * Tembra API base URL endpoint
  */
-export const tembraBase = 'http://localhost:8083';
+// export const tembraBase = 'http://localhost:8083';
 
 
 /**

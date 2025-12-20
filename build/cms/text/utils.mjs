@@ -1,3 +1,3 @@
-import { tembraBase } from "../../types.mjs";
-export const textApiUrl = `${tembraBase}/public/cms/graphql/text`;
+import { apiConfig } from "../../types.mjs";
+export const textApiUrl = `${apiConfig.tembraBase}/public/cms/graphql/text`;
 //# sourceMappingURL=utils.mjs.map

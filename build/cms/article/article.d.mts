@@ -256,6 +256,10 @@ export interface ArticleVersion extends ArticleVersionBase {
      */
     perexImage: string;
     /**
+     * list of tags IDs
+     */
+    tags: string[];
+    /**
      * number of comments for this article version
      */
     commentCount: ArticleComments;

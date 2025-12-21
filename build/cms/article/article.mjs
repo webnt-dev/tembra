@@ -196,6 +196,7 @@ export class ArticleApi extends TembraApi {
 							ogTitle
 							ogImage
 							perexImage
+							tags
 							commentCount {
 								all
 								new

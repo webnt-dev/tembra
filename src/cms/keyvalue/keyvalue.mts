@@ -209,7 +209,7 @@ export type GKeyValueVersionBase = Omit<KeyValueVersionBase, "createdAt" | "upda
 /**
  * key-value version information
  */
-export interface KeyValueVersion {
+export interface KeyValueVersion extends KeyValueVersionBase {
 
 	/**
 	 * KeyValue.id

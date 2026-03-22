@@ -219,6 +219,16 @@ export interface ImportArticleInput {
    */
   publishedTo?: Maybe<Date>;
 
+  /**
+   * when was article created (null or undefined means now)
+   */
+  createdAt?: Maybe<Date>;
+
+  /**
+   * when was article created (null or undefined means now)
+   */
+  updatedAt?: Maybe<Date>;
+
 }
 
 
@@ -426,6 +436,16 @@ export interface ImportArticleVersionInput {
 	 * perex image URL (ident)
 	 */
 	perexImage: string;
+
+  /**
+   * when was article created (null or undefined means now)
+   */
+  createdAt?: Maybe<Date>;
+
+  /**
+   * when was article created (null or undefined means now)
+   */
+  updatedAt?: Maybe<Date>;
 
 }
 
@@ -881,6 +901,8 @@ export class ArticleApi extends TembraApi {
 					...data,
 					publishedFrom: data.publishedFrom.toISOString(),
 					publishedTo: data.publishedTo?.toISOString() ?? null,
+					createdAt: data.createdAt?.toISOString() ?? null,
+					updatedAt: data.updatedAt?.toISOString() ?? null,
 				}
 			}
 		}, {
@@ -910,6 +932,8 @@ export class ArticleApi extends TembraApi {
 				data,
 				publishedFrom: data.publishedFrom.toISOString(),
 				publishedTo: data.publishedTo?.toISOString() ?? null,
+				createdAt: data.createdAt?.toISOString() ?? null,
+				updatedAt: data.updatedAt?.toISOString() ?? null,
 			}
 		}, {
 			'x-wnt-space-id': this.config.spaceId,

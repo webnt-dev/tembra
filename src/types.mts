@@ -18,12 +18,8 @@ export interface LanguageCountry {
  */
 export const apiConfig = {
 	tembraBase: 'https://api.tembra.app',
+	// tembraBase: 'http://localhost:8083',
 }
-
-/**
- * Tembra API base URL endpoint
- */
-// export const tembraBase = 'http://localhost:8083';
 
 
 /**

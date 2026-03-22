@@ -175,6 +175,14 @@ export interface ImportArticleInput {
      * until when is article published from (null represents no end date)
      */
     publishedTo?: Maybe<Date>;
+    /**
+     * when was article created (null or undefined means now)
+     */
+    createdAt?: Maybe<Date>;
+    /**
+     * when was article created (null or undefined means now)
+     */
+    updatedAt?: Maybe<Date>;
 }
 /**
  * listing article input, if any parameter is null | undefined, parameter is ignored
@@ -338,6 +346,14 @@ export interface ImportArticleVersionInput {
      * perex image URL (ident)
      */
     perexImage: string;
+    /**
+     * when was article created (null or undefined means now)
+     */
+    createdAt?: Maybe<Date>;
+    /**
+     * when was article created (null or undefined means now)
+     */
+    updatedAt?: Maybe<Date>;
 }
 /**
  * parameter used for listing fullVersions attribute, if any parameter is null | undefined, parameter is ignored

@@ -17,9 +17,6 @@ export declare const apiConfig: {
     tembraBase: string;
 };
 /**
- * Tembra API base URL endpoint
- */
-/**
  * Tembra API configuration
  */
 export interface TembraApiConfig {

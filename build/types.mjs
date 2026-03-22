@@ -4,6 +4,7 @@ import { gql, graphql, testForApiError } from "./graphql.mjs";
  */
 export const apiConfig = {
     tembraBase: 'https://api.tembra.app',
+    // tembraBase: 'http://localhost:8083',
 };
 /**
  * base Tembra API class

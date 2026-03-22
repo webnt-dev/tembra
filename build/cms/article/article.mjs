@@ -323,6 +323,8 @@ export class ArticleApi extends TembraApi {
                     ...data,
                     publishedFrom: data.publishedFrom.toISOString(),
                     publishedTo: data.publishedTo?.toISOString() ?? null,
+                    createdAt: data.createdAt?.toISOString() ?? null,
+                    updatedAt: data.updatedAt?.toISOString() ?? null,
                 }
             }
         }, {
@@ -349,6 +351,8 @@ export class ArticleApi extends TembraApi {
                 data,
                 publishedFrom: data.publishedFrom.toISOString(),
                 publishedTo: data.publishedTo?.toISOString() ?? null,
+                createdAt: data.createdAt?.toISOString() ?? null,
+                updatedAt: data.updatedAt?.toISOString() ?? null,
             }
         }, {
             'x-wnt-space-id': this.config.spaceId,

@@ -179,12 +179,12 @@ const apiKey = 'mzT4Ku52e9MKqA3E2mBVNMBJF9C5rbyMmBmS8vt48DGkbkZa6qdj3rznmKmkaRJr
 const articleId: string = await (new ArticleApi({ spaceId, apiKey })).importArticle({
 	files: [],
 	tags: [],
-	name: '5th import article',
+	name: '6th import article',
 	published: true,
 	publishedFrom: new Date('2025-02-03T12:15:16Z'),
 	publishedTo: null,
-	createdAt: new Date('2024-04-03T12:16:16Z'),
-	updatedAt: new Date('2024-05-03T12:17:16Z'),
+	// createdAt: new Date('2024-04-03T12:16:16Z'),
+	// updatedAt: new Date('2024-05-03T12:17:16Z'),
 }, (data) => logData(data));
 logData(articleId);
 
@@ -202,13 +202,13 @@ const articleIdV: string = await (new ArticleApi({ spaceId, apiKey })).importArt
 	perexImage: 'img',
 	text: '<h1>tetx</h1><p>data</p>',
 	title: 'tit',
-	url: '/art5',
+	url: '/art6',
 	publishedAsParent: true,
 	published: true,
 	publishedFrom: new Date('2025-02-04T12:15:16Z'),
 	publishedTo: null,
-	createdAt: new Date('2024-10-03T13:16:16Z'),
-	updatedAt: new Date('2024-11-03T14:17:16Z'),
+	// createdAt: new Date('2024-10-03T13:16:16Z'),
+	// updatedAt: new Date('2024-11-03T14:17:16Z'),
 }, (data) => logData(data));
 logData(articleIdV);
 

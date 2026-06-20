@@ -30,9 +30,13 @@
 
     "outDir": "./build",
     "rootDir": "./src",
+    "types": [
+      "node"
+    ],
   },
 	"include": [
 		"src/**/*.mts",
 	],
+
 	"exclude": ["./test/**/*"]
 }

@@ -1,6 +1,6 @@
 {
   "name": "@webnt-dev/tembra",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "description": "Package for public API for Tembra project (https://www.tembra.app)",
   "main": "build/index.mjs",
   "types": "build/index.d.mts",
@@ -30,14 +30,14 @@
   },
   "homepage": "https://github.com/webnt-dev/tembra#readme",
   "devDependencies": {
-    "@rollup/plugin-commonjs": "^29.0.0",
+    "@rollup/plugin-commonjs": "^29.0.3",
     "@rollup/plugin-node-resolve": "^16.0.3",
     "@rollup/plugin-terser": "^1.0.0",
-    "@types/node": "^25.0.3",
-    "npm-check-updates": "^19.2.0",
-    "rollup": "^4.54.0",
+    "@types/node": "^26.0.0",
+    "npm-check-updates": "^22.2.3",
+    "rollup": "^4.62.2",
     "rollup-plugin-summary": "^3.0.1",
-    "typescript": "^5.9.3"
+    "typescript": "^6.0.3"
   },
   "exports": {
     ".": {

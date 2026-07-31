@@ -1,4 +1,4 @@
 export * from './system/index.mjs';
 export * from './cms/index.mjs';
-export { apiConfig } from './types.mjs';
+export { apiConfig, LanguageCountry } from './types.mjs';
 

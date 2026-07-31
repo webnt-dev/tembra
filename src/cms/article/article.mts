@@ -529,6 +529,11 @@ export interface SearchArticleVersionsInput {
 	url?: Maybe<string>;
 }
 
+export interface SearchArticleVersionsResultItem extends ArticleVersion {
+	searchScore: number;
+	tags: string[];
+}
+
 /**
  * result of article version search function, can be used for listing as well just do not use "search" parameter in request
  */
@@ -538,7 +543,7 @@ export interface SearchArticleVersionsResult {
 	 * searchScore represents search match if "search" parameter is used, higher score, higher match (if "search" not specified, field returns 1)
 	 * tags represents list of article tags
 	 */
-	items: (ArticleVersion & { searchScore: number; tags: string[]; })[];
+	items: SearchArticleVersionsResultItem[];
 
 	/**
 	 * search listing information
